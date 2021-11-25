@@ -12,8 +12,8 @@
 <body>
 
   <section class="container">
-    <form>
-      <input type="text" placeholder="Insira">
+    <form action="/tarefas/create" method="POST">
+      <input type="text" name='nome' placeholder="Insira">
       <button type="submit">Enviar</button>
     </form>
     <table>
@@ -23,15 +23,18 @@
         <th class="deletar">Deletar</th>
       </tr>
 
-      <tr>
-        <td class="id"> 1</td>
-        <td class="nome"> Prova de ED </td>
-        <td class="deletar">
-          <form>
-            <button class="btn-delete" type="submit">Deletar</button>
-          </form>
-        </td>
-      </tr>
+      <?php foreach ($tarefas as $tarefa) : ?>
+        <tr>
+          <td class="id"><?= $tarefa->id ?></td>
+          <td class="nome"><?= $tarefa->nome ?> </td>
+          <td class="deletar">
+            <form action="/tarefas/delete" method="POST">
+              <input type="hidden" value="<?= $tarefa->id ?>" name="id">
+              <button class="btn-delete" type="submit">Deletar</button>
+            </form>
+          </td>
+        </tr>
+      <?php endforeach; ?>
     </table>
   </section>
 
